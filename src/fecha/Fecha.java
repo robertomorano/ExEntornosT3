@@ -9,15 +9,15 @@ public class Fecha {
 	/**
 	 * Atributo del dia para la fecha
 	 */
-	private int d; // d�a
+	private int dia; // d�a
 	/**
 	 * Atributo del dia para la fecha
 	 */
-	private int m; // mes
+	private int month; // mes
 	/**
 	 * Atributo del dia para la fecha
 	 */
-	private int a; // a�o
+	private int año; // a�o
 
 	/**
 	 * Constructor vacio
@@ -34,9 +34,9 @@ public class Fecha {
 	 * @param anio año segun el calendario
 	 */
 	public Fecha(int dia, int mes, int anio) {
-		this.d = dia;
-		this.m = mes;
-		this.a = anio;
+		this.dia = dia;
+		this.month = mes;
+		this.año = anio;
 	}
 
 	/**
@@ -45,25 +45,27 @@ public class Fecha {
 	 * @return un booleano para ver si la fecha es correcta
 	 */
 	public boolean fechaCorrecta() {
-		boolean diaCorrecto, mesCorrecto, anioCorrecto;
-		anioCorrecto = a > 0;
-		mesCorrecto = m >= 1 && m <= 12;
-		switch (m) {
+		boolean diaCorrecto; 
+		boolean mesCorrecto;
+		boolean anioCorrecto;
+		anioCorrecto = año > 0;
+		mesCorrecto = month >= 1 && month <= 12;
+		switch (month) {
 		case 2:
 			if (esBisiesto()) {
-				diaCorrecto = d >= 1 && d <= 29;
+				diaCorrecto = dia >= 1 && dia <= 29;
 			} else {
-				diaCorrecto = d >= 1 && d <= 28;
+				diaCorrecto = dia >= 1 && dia <= 28;
 			}
 			break;
 		case 4:
 		case 6:
 		case 9:
 		case 11:
-			diaCorrecto = d >= 1 && d <= 30;
+			diaCorrecto = dia >= 1 && dia <= 30;
 			break;
 		default:
-			diaCorrecto = d >= 1 && d <= 31;
+			diaCorrecto = dia >= 1 && dia <= 31;
 		}
 		return diaCorrecto && mesCorrecto && anioCorrecto;
 	}
@@ -75,8 +77,7 @@ public class Fecha {
 	 * @return si el año es bisiesto
 	 */
 	private boolean esBisiesto() {
-		boolean esBisiesto = (a % 4 == 0 && a % 100 != 0 || a % 400 == 0);
-		return esBisiesto;
+		return año % 4 == 0 && año % 100 != 0 || año % 400 == 0;
 	}
 
 	// M�todo diaSiguiente
@@ -84,13 +85,13 @@ public class Fecha {
 	 * Pasa de dia y compruba si se ha cambiado de mes
 	 */
 	public void diaSiguiente() {
-		d++;
+		dia++;
 		if (!fechaCorrecta()) {
-			d = 1;
-			m++;
+			dia = 1;
+			month++;
 			if (!fechaCorrecta()) {
-				m = 1;
-				a++;
+				month = 1;
+				año++;
 			}
 		}
 	}
@@ -101,15 +102,17 @@ public class Fecha {
 	 * @return devuelve el objeto pasado a cadena
 	 */
 	public String toString() {
-		if (d < 10 && m < 10) {
-			return "0" + d + "-0" + m + "-" + a;
-		} else if (d < 10 && m >= 10) {
-			return "0" + d + "-" + m + "-" + a;
-		} else if (d >= 10 && m < 10) {
-			return d + "-0" + m + "-" + a;
+		String texto = "";
+		if (dia < 10 && month < 10) {
+			texto = "0" + dia + "-0" + month + "-" + año;
+		} else if (dia < 10 && month >= 10) {
+			texto = "0" + dia + "-" + month + "-" + año;
+		} else if (dia >= 10 && month < 10) {
+			texto = dia + "-0" + month + "-" + año;
 		} else {
-			return d + "-" + m + "-" + a;
+			texto = dia + "-" + month + "-" + año;
 		}
+		return texto;
 	}
 
 }
