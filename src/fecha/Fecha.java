@@ -1,24 +1,49 @@
 package fecha;
 
+/**
+ * Clase que guaarda atributos para saber fechas
+ * 
+ * @author anonimo
+ */
 public class Fecha {
-	private int d; //día
-	private int m; //mes
-	private int a; //año
+	/**
+	 * Atributo del dia para la fecha
+	 */
+	private int d; // dï¿½a
+	/**
+	 * Atributo del dia para la fecha
+	 */
+	private int m; // mes
+	/**
+	 * Atributo del dia para la fecha
+	 */
+	private int a; // aï¿½o
 
-	
+	/**
+	 * Constructor vacio
+	 */
 	public Fecha() {
 
 	}
 
-	
+	/**
+	 * Constructor de la clase Fecha
+	 * 
+	 * @param dia  dia del mes
+	 * @param mes  mes del aÃ±o
+	 * @param anio aÃ±o segun el calendario
+	 */
 	public Fecha(int dia, int mes, int anio) {
 		this.d = dia;
 		this.m = mes;
 		this.a = anio;
 	}
 
-	
-	
+	/**
+	 * Funcion booleana que comprueba si la fecha es correcta
+	 * 
+	 * @return un booleano para ver si la fecha es correcta
+	 */
 	public boolean fechaCorrecta() {
 		boolean diaCorrecto, mesCorrecto, anioCorrecto;
 		anioCorrecto = a > 0;
@@ -43,13 +68,21 @@ public class Fecha {
 		return diaCorrecto && mesCorrecto && anioCorrecto;
 	}
 
-	// Método esBisiesto. Solo lo usa fechaCorrecta, por eso es privado
+	// Mï¿½todo esBisiesto. Solo lo usa fechaCorrecta, por eso es privado
+	/**
+	 * Metodo esBisiesto. Ciertos aÃ±os tiene en febrero un dia mas, metodo inerno
+	 * 
+	 * @return si el aÃ±o es bisiesto
+	 */
 	private boolean esBisiesto() {
 		boolean esBisiesto = (a % 4 == 0 && a % 100 != 0 || a % 400 == 0);
 		return esBisiesto;
 	}
 
-	// Método diaSiguiente
+	// Mï¿½todo diaSiguiente
+	/**
+	 * Pasa de dia y compruba si se ha cambiado de mes
+	 */
 	public void diaSiguiente() {
 		d++;
 		if (!fechaCorrecta()) {
@@ -62,7 +95,11 @@ public class Fecha {
 		}
 	}
 
-	// Método toString
+	/**
+	 * Metodo toString de la clase
+	 * 
+	 * @return devuelve el objeto pasado a cadena
+	 */
 	public String toString() {
 		if (d < 10 && m < 10) {
 			return "0" + d + "-0" + m + "-" + a;
